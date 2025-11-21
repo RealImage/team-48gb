@@ -5,6 +5,7 @@ import (
 
 	"github.com/RealImage/team-48gb/internal/dao"
 	"github.com/RealImage/team-48gb/internal/dtos"
+	"go.mongodb.org/mongo-driver/v2/mongo"
 )
 
 // CampaignService defines the interface for campaign-related operations
@@ -12,8 +13,8 @@ type CampaignService struct {
 	campaignDAO *dao.CampaignDAO
 }
 
-func NewCampaignService() *CampaignService {
-	campaignDAO := dao.NewCampaignDAO()
+func NewCampaignService(db *mongo.Database) *CampaignService {
+	campaignDAO := dao.NewCampaignDAO(db)
 	return &CampaignService{
 		campaignDAO: campaignDAO,
 	}

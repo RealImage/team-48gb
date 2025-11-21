@@ -57,8 +57,3 @@ func (mc *MongoClient) Disconnect() error {
 	log.Println("Disconnected from MongoDB")
 	return nil
 }
-
-// GetCollection returns a collection from the database
-func (mc *MongoClient) GetCollection(collectionName string) *mongo.Collection {
-	return mc.Database.Collection(collectionName)
-}
