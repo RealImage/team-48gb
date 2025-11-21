@@ -3,6 +3,7 @@ package router
 import (
 	"net/http"
 
+	"github.com/RealImage/team-48gb/internal/db"
 	"github.com/RealImage/team-48gb/internal/handler"
 	"github.com/RealImage/team-48gb/internal/services"
 
@@ -11,7 +12,7 @@ import (
 )
 
 // NewRouter creates and configures a new chi router
-func NewRouter() http.Handler {
+func NewRouter(client *db.MongoClient) http.Handler {
 	r := chi.NewRouter()
 
 	// Middleware
@@ -19,7 +20,7 @@ func NewRouter() http.Handler {
 	r.Use(middleware.Recoverer)
 
 	// Initialize services
-	campaignService := services.NewCampaignService()
+	campaignService := services.NewCampaignService(client.Database)
 
 	// Initialize handlers
 	campaignHandler := handler.NewCampaignHandler(campaignService)
